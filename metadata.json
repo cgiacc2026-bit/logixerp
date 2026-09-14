@@ -1,0 +1,6 @@
+{
+  "name": "LogixERP",
+  "description": "Enterprise Resource Planning system for managing sales, inventory, expenses, journals, and financial reports.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
