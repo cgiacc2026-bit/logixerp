@@ -74,9 +74,9 @@ export const DashboardNavbar = (props) => {
               cursor: 'pointer',
               height: 40,
               width: 40,
-              ml: 1
+              ml: 1,
+              bgcolor: 'primary.main'
             }}
-            src="/static/images/avatars/avatar_1.png"
           >
             <UserCircleIcon fontSize="small" />
           </Avatar>

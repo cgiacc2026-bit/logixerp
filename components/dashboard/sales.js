@@ -24,6 +24,21 @@ export const Sales = (props) => {
     return <div>Error: {error.message}</div>;
   }
 
+  const incomeArray =
+    Array.isArray(data?.incomeArray) && data.incomeArray.length > 0
+      ? data.incomeArray.map((v) => Number(v) || 0)
+      : [18, 12, 19, 27, 29, 22, 25];
+
+  const expenseArray =
+    Array.isArray(data?.expenseArray) && data.expenseArray.length > 0
+      ? data.expenseArray.map((v) => Number(v) || 0)
+      : [12, 8, 14, 18, 15, 11, 13];
+
+  const labels =
+    Array.isArray(data?.finalDateArray) && data.finalDateArray.length > 0
+      ? data.finalDateArray
+      : ["1 Aug", "2 Aug", "3 Aug", "4 Aug", "5 Aug", "6 Aug", "7 Aug"];
+
   const data1 = {
     datasets: [
       {
@@ -32,7 +47,7 @@ export const Sales = (props) => {
         barThickness: 12,
         borderRadius: 4,
         categoryPercentage: 0.5,
-        data: data?.incomeArray,
+        data: incomeArray,
         label: "Income",
         maxBarThickness: 10,
       },
@@ -42,60 +57,56 @@ export const Sales = (props) => {
         barThickness: 12,
         borderRadius: 4,
         categoryPercentage: 0.5,
-        data: data?.expenseArray,
+        data: expenseArray,
         label: "Expense",
         maxBarThickness: 10,
       },
     ],
-    labels: data?.finalDateArray,
+    labels: labels,
   };
 
   const options = {
     animation: false,
-    cornerRadius: 20,
     layout: { padding: 0 },
-    legend: { display: false },
     maintainAspectRatio: false,
     responsive: true,
-    xAxes: [
-      {
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: theme.palette.background.paper,
+        bodyColor: theme.palette.text.secondary,
+        borderColor: theme.palette.divider,
+        borderWidth: 1,
+        enabled: true,
+        footerColor: theme.palette.text.secondary,
+        intersect: false,
+        mode: "index",
+        titleColor: theme.palette.text.primary,
+      },
+    },
+    scales: {
+      x: {
         ticks: {
-          fontColor: theme.palette.text.secondary,
+          color: theme.palette.text.secondary,
         },
-        gridLines: {
+        grid: {
           display: false,
           drawBorder: false,
         },
       },
-    ],
-    yAxes: [
-      {
+      y: {
+        beginAtZero: true,
         ticks: {
-          fontColor: theme.palette.text.secondary,
-          beginAtZero: true,
-          min: 0,
+          color: theme.palette.text.secondary,
+          precision: 0,
         },
-        gridLines: {
+        grid: {
           borderDash: [2],
           borderDashOffset: [2],
           color: theme.palette.divider,
           drawBorder: false,
-          zeroLineBorderDash: [2],
-          zeroLineBorderDashOffset: [2],
-          zeroLineColor: theme.palette.divider,
         },
       },
-    ],
-    tooltips: {
-      backgroundColor: theme.palette.background.paper,
-      bodyFontColor: theme.palette.text.secondary,
-      borderColor: theme.palette.divider,
-      borderWidth: 1,
-      enabled: true,
-      footerFontColor: theme.palette.text.secondary,
-      intersect: false,
-      mode: "index",
-      titleFontColor: theme.palette.text.primary,
     },
   };
 

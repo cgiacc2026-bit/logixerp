@@ -33,41 +33,45 @@ export const PieChartSells = (props) => {
     Name.push(item1[x].product_name)
   }
 
-  // console.log(item1)
+  const displayVal = val.length > 0 ? val : [53, 27, 17, 3];
+  const displayName = Name.length > 0 ? Name : ['Shoes', 'Watch', 'Hoodie', 'Other'];
+
   const theme = useTheme();
 
   const data = {
     datasets: [
       {
-        data: val,
+        data: displayVal,
         backgroundColor: ['#3F51B5', '#e53935', '#FB8C00','#004800'],
         borderWidth: 8,
         borderColor: '#FFFFFF',
         hoverBorderColor: '#FFFFFF'
       }
     ],
-    labels: Name
+    labels: displayName
   };
 
   const options = {
     animation: false,
-    cutoutPercentage: 80,
+    cutout: '80%',
     layout: { padding: 0 },
-    legend: {
-      display: false
-    },
     maintainAspectRatio: false,
     responsive: true,
-    tooltips: {
-      backgroundColor: theme.palette.background.paper,
-      bodyFontColor: theme.palette.text.secondary,
-      borderColor: theme.palette.divider,
-      borderWidth: 1,
-      enabled: true,
-      footerFontColor: theme.palette.text.secondary,
-      intersect: false,
-      mode: 'index',
-      titleFontColor: theme.palette.text.primary
+    plugins: {
+      legend: {
+        display: false
+      },
+      tooltip: {
+        backgroundColor: theme.palette.background.paper,
+        bodyColor: theme.palette.text.secondary,
+        borderColor: theme.palette.divider,
+        borderWidth: 1,
+        enabled: true,
+        footerColor: theme.palette.text.secondary,
+        intersect: false,
+        mode: 'index',
+        titleColor: theme.palette.text.primary
+      }
     }
   };
 
